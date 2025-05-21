@@ -16,3 +16,12 @@ def burger_list(request):
     }
 
     return render(request, "burger_list.html", context)
+
+def burger_search(request):
+    keyword = request.GET.get('keyword')
+    print(keyword)
+
+    burgers = Burger.objects.filter(name__contains=keyword)
+    print(burgers)
+
+    return render(wqrequest, 'burger_search.html')
