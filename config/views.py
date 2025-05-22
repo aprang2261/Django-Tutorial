@@ -19,9 +19,14 @@ def burger_list(request):
 
 def burger_search(request):
     keyword = request.GET.get('keyword')
-    print(keyword)
 
-    burgers = Burger.objects.filter(name__contains=keyword)
-    print(burgers)
+    if keyword is not None:
+        burgers = Burger.objects.filter(name__contains=keyword)
 
-    return render(wqrequest, 'burger_search.html')
+    else:
+        burgers = Burger.objects.none()
+
+    context = {
+        "burgers": burgers,
+    }
+    return render(request, 'burger_search.html', context)
